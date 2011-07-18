@@ -6,16 +6,17 @@ from subprocess import Popen,PIPE
 import shlex
 
 
-class SampleRobotFortune(GtalkRobot):
+class DumbTerminalBot(GtalkRobot):
     terminalState=0               #determines whether the default handler will be working for getting terminal commands or in normal mode. 0=off, 1=on
-    
+    helpString = "Chat Bot v1.0\nAvailable commands:\n 1. terminal - to open the terminal"
+
     def command_001_help(self,user,message,args):
-	#TODO: May be you can make the below text as a function so that it can called whenever help is needed
-	self.replyMessage(user, "Chat Bot v1.0\nAvailable commands:\n 1. terminal - to open the terminal");
+	'''(help)( +(.*))?$(?i)'''
+	self.replyMessage(user, self.helpString)
                     
-    #@Karthik: Use ''' comments to explain about a function. Remove this comment later.
+    #@Karthik: What is the diff between ''' and #.
     def command_100_default(self, user, message, args):   #The default handler also implements the functionality of terminal
-        """.*?(?s)(?m)"""
+        '''.*?(?s)(?m)'''
         
         if(message=='terminal'):
             self.replyMessage(user,"\nTerminal started\n")
@@ -23,8 +24,7 @@ class SampleRobotFortune(GtalkRobot):
             self.terminalState=1
             
         elif(self.terminalState==0):
-	    #TODO: print that the command doesn't exist and print the default help.
-            self.replyMessage(user,'The command \'%s\' does not exist'%message)  
+	    self.replyMessage(user, self.helpString)
             
         elif(self.terminalState==1):            
             comList=shlex.split(message)
@@ -34,7 +34,7 @@ class SampleRobotFortune(GtalkRobot):
                 self.replyMessage(user,'Exiting from terminal')
 
             else:
-                process=Popen(comList,stdout=PIPE)                
+                process=Popen(comList,stdout=PIPE, stdin=None, shell=False)
                 output=process.communicate()
                 self.replyMessage(user,'\n')
                 self.replyMessage(user,output[0])
@@ -44,7 +44,7 @@ class SampleRobotFortune(GtalkRobot):
             
               
 if __name__=="__main__":
-    bot = SampleRobotFortune()
+    bot = DumbTerminalBot()
     bot.setState('available', "Dumb terminal bot")
     bot.start("karthikshaastradistro@gmail.com", "ROME1234")
         

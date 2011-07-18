@@ -2,6 +2,8 @@
 
 import os
 from PyGtalkRobot import GtalkRobot
+from subprocess import Popen,PIPE
+import shlex
 
 class SampleRobotFortune(GtalkRobot):
     
