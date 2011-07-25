@@ -1,3 +1,5 @@
+#Note: readline would not work on an unterminated process. Read the notes in
+#processTerminal.py file.
 from subprocess import Popen,PIPE
 import shlex
 import threading
