@@ -169,7 +169,8 @@ class GtalkRobot:
     # "debug" parameter specifies the debug IDs that will go into debug output.
     # You can either specifiy an "include" or "exclude" list. The latter is done via adding "always" pseudo-ID to the list.
     # Full list: ['nodebuilder', 'dispatcher', 'gen_auth', 'SASL_auth', 'bind', 'socket', 'CONNECTproxy', 'TLS', 'roster', 'browser', 'ibb'].
-    def __init__(self, server_host="talk.google.com", server_port=5223, debug=[]):
+    #def __init__(self, server_host="talk.google.com", server_port=5223, debug=[]):
+    def __init__(self, server_host="talk.google.com", server_port=443, debug=['bind']):
         self.debug = debug
         self.server_host = server_host
         self.server_port = server_port

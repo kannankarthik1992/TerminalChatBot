@@ -19,6 +19,6 @@ class SampleRobotFortune(GtalkRobot):
 if __name__=="__main__":
     bot = SampleRobotFortune()
     bot.setState('available', "Simple Gtalk Robot")
-    bot.start("karthikshaastradistro@gmail.com", "ROME1234")
+    bot.start("karthikshaastradistro@gmail.com", "KarthikKannan")
         
     
